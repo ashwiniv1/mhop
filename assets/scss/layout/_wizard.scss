@@ -1,0 +1,106 @@
+.wizard {
+    margin: 20px auto;
+    background: #fff;
+    .wizard-inner {
+      position: relative;
+    }
+    .wizard-tabs {
+      position: relative;
+      justify-content: space-between;
+      border-bottom: none;
+      margin: 40px auto;
+      li {
+        position: relative;
+        flex: 1;
+        text-align: center;
+        a {
+          display: inline-block;
+          color: #52585b;
+          &:hover {
+            background: transparent;
+          }
+        }
+        &:last-child {
+          &:after {
+            background-color: transparent;
+          }
+        }
+  
+        &:after {
+          content: '';
+          width: 95.1%;
+          height: 2px;
+          background-color: #e0e0e0;
+          position: absolute;
+          right: -48%;
+          top: 15%;
+        }
+        &.completed {
+          span.round-tab {
+            background-color: #1278dc;
+            border-color: #1278dc;
+            &:after {
+              content: '\f00c';
+              font-family: FontAwesome;
+              font-size: 10px;
+              color: #fff;
+              position: absolute;
+              top: -4px;
+              left: 0;
+              right: 0;
+            }
+          }
+          &:after {
+            background-color: #1278dc;
+          }
+        }
+      }
+    }
+    li {
+      &.active {
+        span.round-tab {
+          background: #fff;
+          border: 2px solid #1278dc;
+          i {
+            color: #5bc0de;
+          }
+        }
+      }
+      span.round-tab {
+        width: 16px;
+        height: 16px;
+        line-height: 20px;
+        border-radius: 100px;
+        background: #fff;
+        border: 2px solid #e0e0e0;
+        z-index: 2;
+        display: block;
+        text-align: center;
+        font-size: 25px;
+        margin: 0 auto;
+        position: relative;
+        i {
+          color: #555555;
+        }
+        &:hover {
+          color: #333;
+          border: 2px solid #1278dc;
+        }
+      }
+    }
+    .tab-pane {
+      position: relative;
+      padding-top: 50px;
+    }
+    .bkcode-list {
+      .list-group-item {
+        border: none;
+        padding: 0 !important;
+      }
+    }
+    .not-active {
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+  

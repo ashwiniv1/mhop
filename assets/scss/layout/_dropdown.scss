@@ -1,0 +1,192 @@
+// Horizontal dividers
+//
+// Dividers (basically an hr) within dropdowns and nav lists
+
+@mixin nav-divider($color: #e5e5e5) {
+  height: 0;
+  margin: ($spacer / 2) 0;
+  overflow: hidden;
+  border-top: 1px solid $color;
+}
+
+
+// The dropdown menu
+.dropdown-menu {
+  z-index: $zindex-dropdown;
+  min-width: $dropdown-min-width !important;
+  padding: $dropdown-padding-y 0;
+  margin: $dropdown-spacer 0 0;
+  font-size: $font-size-sm !important;
+  color: $body-color !important;
+  background-color: $dropdown-bg;
+  border: $dropdown-border-width solid $dropdown-border-color !important;
+  border-top-width: $dropdown-top-border-width !important;
+  border-top-color: $dropdown-top-border-color !important;
+  border-radius: $dropdown-border-radius !important;
+  @include box-shadow($dropdown-box-shadow);
+
+  li {
+    border-bottom: 1px solid $gray-400;
+    line-height: $dropdown-line-height;
+    padding: 0 $dropdown-large-padding-x;
+
+    a {
+      color: $body-color !important;
+
+      i {
+        color: $dropdown-icon-color !important;
+        vertical-align: middle;
+        font-size: $font-size-base;
+        &.link-darkblue {
+          color: $blue !important;
+        }
+
+        &.text-large {
+          font-size: 1rem !important;
+        }
+      }
+    }
+
+    span {
+      color: $body-color !important;
+
+      &.link-blue {
+        color: $bright-yellow !important;
+      }
+
+      &.link-darkblue {
+        color: $blue !important;
+      }
+
+      &.text-large {
+        font-size: 1rem !important;
+      }
+
+      &.text-small {
+        font-size: 0.6875rem !important;
+      }
+    }
+
+    &:last-child {
+      border: none !important;
+      border-bottom-right-radius: $dropdown-border-radius;
+      border-bottom-left-radius: $dropdown-border-radius;
+    }
+
+    &:hover,
+    &.active {
+      background: $gray-300 !important;
+
+      a {
+        color: $bright-yellow !important;
+
+        i {
+          color: $bright-yellow !important;
+        }
+      }
+    }
+  }
+
+  &-small {
+    @include box-shadow($dropdown-small-box-shadow);
+    padding: $dropdown-small-padding-y 0;
+    font-size: $dropdown-small-font-size;
+
+    .dropdown-item {
+      padding: $dropdown-small-item-padding-y $dropdown-small-item-padding-x;
+      font-size: $dropdown-small-item-font-size;
+    }
+
+    .dropdown-divider {
+      margin: $dropdown-small-divider-margin-y $dropdown-small-divider-margin-x;
+    }
+  }
+
+  .dropdown-header {
+    border-bottom: 1px solid $gray-800 !important;
+    background: $gray-300 !important;
+  }
+
+  .dropdown-header {
+    border-top: 1px solid $gray-800 !important;
+  }
+}
+
+.dropup .dropdown-menu {
+  margin-bottom: $dropdown-spacer;
+}
+
+.dropright .dropdown-menu {
+  margin-left: $dropdown-spacer;
+}
+
+.dropleft .dropdown-menu {
+  margin-right: $dropdown-spacer;
+}
+
+// Dividers (basically an `<hr>`) within the dropdown
+.dropdown-divider {
+  @include nav-divider($dropdown-divider-bg);
+}
+
+// Links, buttons, and more within the dropdown menu
+//
+// `<button>`-specific styles are denoted with `// For <button>s`
+.dropdown-item {
+  padding: $dropdown-item-padding-y $dropdown-item-padding-x;
+  font-weight: $font-weight-normal;
+  color: $dropdown-link-color;
+  font-size: $dropdown-item-font-size;
+  transition: $dropdown-item-transition;
+
+  @include hover-focus {
+    color: $dropdown-link-hover-color;
+    @include gradient-bg($dropdown-link-hover-bg);
+  }
+
+  &.active,
+  &:active {
+    color: $dropdown-link-active-color;
+    @include gradient-bg($dropdown-link-active-bg);
+  }
+
+  &.disabled,
+  &:disabled {
+    color: $dropdown-link-disabled-color;
+
+    &:hover {
+      background: none;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Dropdown section headers
+.dropdown-header {
+  padding: $dropdown-padding-y $dropdown-item-padding-x;
+  font-size: $font-size-sm;
+  color: $dropdown-header-color;
+}
+
+/*.dropdown-menu{
+  display: block !important;
+}*/
+.dropdown-toggle::after {
+  color: $gray-800;
+  position: absolute;
+  right: 0;
+  border: none !important;
+  content: '\e909' !important;
+  font-family: icomoon;
+  top: 0;
+  font-size: 1rem;
+  right: 0;
+}
+
+.navbar-nav .dropdown-menu {
+  position: absolute !important;
+}
+.dropdown-item:focus,
+.dropdown-item:hover {
+  background: rgba(0, 0, 0, 0) !important;
+}

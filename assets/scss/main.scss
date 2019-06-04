@@ -1,0 +1,50 @@
+/*
+ * Shards v2.1.2 (https://designrevision.com/downloads/shards/)
+ * Based on: Bootstrap v4.1.3 (https://getbootstrap.com)
+ * Copyright 2017-* DesignRevision (https://designrevision.com)
+ * Copyright 2017-* Catalin Vasile (http://catalin.me)
+ */
+
+// Bootstrap 4 dependencies
+// @import 'node_modules/bootstrap/scss/functions';
+
+// Core
+@import 'utilities/mixins';
+@import 'utilities/variables';
+@import 'base/root';
+@import 'base/reboot';
+@import 'base/type';
+@import 'layout/images';
+@import 'layout/code';
+@import 'layout/tables';
+@import 'layout/transitions';
+@import 'layout/forms';
+@import 'layout/buttons';
+@import 'layout/wizard';
+
+//  Components
+@import 'layout/icons';
+@import 'layout/dropdown';
+@import 'layout/button-group';
+@import 'layout/input-group';
+@import 'layout/custom-forms';
+@import 'layout/nav';
+@import 'layout/navbar';
+@import 'layout/card';
+@import 'layout/pagination';
+@import 'layout/badge';
+@import 'layout/jumbotron';
+@import 'layout/alert';
+@import 'layout/progress';
+@import 'layout/list-group';
+@import 'layout/close';
+@import 'layout/modal';
+@import 'layout/tooltip';
+@import 'layout/popover';
+@import 'layout/carousel';
+@import 'layout/custom-sliders';
+@import 'layout/custom-datepicker';
+@import 'utilities/utilities';
+@import 'layout/toaster';
+
+// @import 'common';

@@ -1,0 +1,20 @@
+@mixin transition($transition...) {
+  @if $enable-transitions {
+    @if length($transition) == 0 {
+      transition: $transition-base;
+    } @else {
+      transition: $transition;
+    }
+  }
+}
+
+
+// Transitions Adjustments
+
+.fade {
+  @include transition($transition-fade);
+}
+
+.collapsing {
+  @include transition($transition-collapse);
+}

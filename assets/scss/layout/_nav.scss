@@ -1,0 +1,253 @@
+// Nav adjustments
+
+.nav {
+  font-size: 0.875rem;
+  font-family: $nav-font-family;
+}
+.nav-item {
+  position: relative;
+  &.active {
+    a {
+      color: $bright-yellow !important;
+    }
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 3px;
+    background: $bright-yellow;
+    width: 0;
+    transition: all 0.3s;
+  }
+  &.active,
+  &:hover {
+    > a {
+      color: $bright-yellow !important;
+      i {
+        color: $bright-yellow !important;
+      }
+    }
+    &:after {
+      width: 100%;
+    }
+  }
+}
+.nav-item {
+  margin-right: $nav-link-margin-x;
+  margin-left: $nav-link-margin-x;
+  &.dropdown {
+    margin-right: $nav-link-large-margin-x;
+  }
+  .nav-link {
+    padding: 0 $nav-link-padding-x !important;
+    color: $nav-link-color !important;
+    font-size: $nav-link-font-size;
+    line-height: $nav-link-line-height;
+    @include transition($nav-transition);
+
+    // Disabled state lightens text
+    &.disabled {
+      color: $nav-link-disabled-color;
+    }
+  }
+}
+
+//
+// Tabs
+//
+
+.nav-tabs {
+  border-bottom: $nav-tabs-border-width solid $nav-tabs-border-color;
+
+  .nav-item {
+    margin-bottom: -$nav-tabs-border-width;
+  }
+
+  .nav-link {
+    border: $nav-tabs-border-width solid transparent;
+    @include border-top-radius($nav-tabs-border-radius);
+
+    @include hover-focus {
+      border-color: $nav-tabs-link-hover-border-color;
+    }
+
+    &.disabled {
+      color: $nav-link-disabled-color;
+
+      &:hover {
+        cursor: not-allowed;
+        border-color: transparent;
+      }
+    }
+
+    &:hover {
+      border-color: lighten($nav-tabs-border-color, 8%);
+    }
+  }
+
+  .nav-link.active,
+  .nav-item.show .nav-link {
+    color: $nav-tabs-link-active-color;
+    background-color: $nav-tabs-link-active-bg;
+    border-color: $nav-tabs-link-active-border-color;
+  }
+
+  .dropdown-menu {
+    // Make dropdown border overlap tab border
+    margin-top: -$nav-tabs-border-width;
+    // Remove the top rounded corners here since there is a hard edge above the menu
+    @include border-top-radius(0);
+  }
+}
+
+//
+// Pills
+//
+
+.nav-pills {
+  .nav-link {
+    @include border-radius($nav-pills-border-radius);
+  }
+
+  .nav-link.active,
+  .show > .nav-link {
+    color: $nav-pills-link-active-color;
+    background-color: $nav-pills-link-active-bg;
+  }
+
+  &:hover {
+    background-color: lighten($nav-tabs-border-color, 16%);
+  }
+}
+
+//
+// Nav Outlined Pills
+//
+
+.nav-outlined-pills {
+  .nav-link {
+    @include border-radius($nav-pills-border-radius);
+    border: 1px solid transparent;
+
+    &.active,
+    .show > & {
+      background: none;
+      color: $nav-pills-link-active-bg;
+      border-color: $nav-pills-link-active-bg;
+    }
+
+    &:hover {
+      border-color: lighten($nav-tabs-border-color, 8%);
+    }
+  }
+}
+
+//
+// Color variations
+//
+
+@each $color, $value in $colors {
+  .nav-#{$color} {
+    .nav-link {
+      // Active pills
+      &.active {
+        background-color: $value;
+        border-color: darken($value, 3%);
+        color: color-yiq($value);
+      }
+
+      &.disabled {
+        color: $nav-link-disabled-color;
+
+        &:hover {
+          cursor: not-allowed;
+          border-color: transparent;
+        }
+      }
+    }
+
+    // Link color
+    .nav-link {
+      color: $value;
+    }
+
+    // Outlined pills color variations.
+    &.nav-outlined-pills {
+      // Active pills
+      .nav-link.active {
+        background: transparent;
+        border-color: lighten($value, 10%);
+        color: $value;
+
+        &:hover {
+          border-color: lighten($value, 10%);
+        }
+      }
+
+      // Link color
+      .nav-link {
+        color: $value;
+      }
+    }
+  }
+}
+.main-navbar .nav-item:first-child {
+  margin-left: 0;
+}
+.main-navbar .nav-item:last-child {
+  margin-right: 0;
+}
+.sidebar .nav-item {
+  margin: 0 !important;
+  padding: 0.3rem 0 !important;
+  .nav-link {
+    padding: 0 !important;
+    line-height: 3.5rem;
+    background: none !important;
+    position: relative;
+    i {
+      font-size: $nav-link-icon-font-size;
+      color: $nav-link-icon-color;
+    }
+    &.active {
+      color: $bright-yellow !important;
+
+      i {
+        color: $bright-yellow;
+      }
+    }
+  }
+  &:after {
+    content: none;
+  }
+  .dropdown-toggle:after {
+    top: 36px;
+    right: 20px;
+    transform: rotate(270deg);
+    line-height: 20px;
+  }
+  .active.dropdown-toggle:after {
+    top: 18px;
+    transform: rotate(0);
+    right: 16px;
+  }
+  .dropdown-menu {
+    position: relative;
+    width: 100%;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0;
+    margin-top: -10px;
+    top: 0;
+    li {
+      border: none;
+      padding: 0 2.5rem;
+      .active {
+        color: $bright-yellow !important;
+      }
+    }
+  }
+}

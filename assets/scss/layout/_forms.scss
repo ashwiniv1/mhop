@@ -1,0 +1,510 @@
+// stylelint-disable selector-no-qualifying-type
+
+//
+// Textual form controls
+//
+
+.form-control {
+  height: auto;
+  padding: $input-padding-y $input-padding-x;
+  font-size: $input-font-size; // $font-size-base;
+  line-height: $input-line-height;
+  color: $input-color !important;
+  background-color: $input-bg !important;
+  border: $input-border-width solid $input-border-color;
+  font-weight: $font-weight-normal;
+  -webkit-appearance: none;
+  will-change: border-color, box-shadow;
+
+  // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
+  @if $enable-rounded {
+    // Manually use the if/else instead of the mixin to account for iOS override
+    border-radius: $input-border-radius;
+  } @else {
+    // Otherwise undo the iOS default
+    border-radius: 0;
+  }
+
+  @include box-shadow($input-box-shadow);
+  @include transition($input-transition);
+
+  &:hover {
+    border-color: $input-hover-border-color;
+  }
+
+  // Customize the `:focus` state to imitate native WebKit styles.
+  @include form-control-focus();
+
+  // Placeholder
+  &::placeholder {
+    color: $input-placeholder-color;
+  }
+
+  // Disabled and read-only inputs
+  &:disabled,
+  &[readonly] {
+    background-color: $input-disabled-bg;
+
+    &:hover {
+      border-color: $input-border-color;
+      cursor: not-allowed;
+    }
+  }
+
+  // Fix readonly, but not disabled fields box shadow and border color.
+  &[readonly]:not(:disabled) {
+    &:focus {
+      box-shadow: none;
+      border-color: $input-border-color;
+    }
+  }
+}
+
+// Select form controls
+
+select.form-control {
+  &:not([size]):not([multiple]) {
+    height: $input-height;
+  }
+
+  &:focus::-ms-value {
+    color: $input-color;
+    background-color: $input-bg;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+// Labels
+
+form label:hover {
+  cursor: pointer;
+}
+
+.col-form-label {
+  padding-top: calc(#{$input-padding-y} + #{$input-border-width});
+  padding-bottom: calc(#{$input-padding-y} + #{$input-border-width});
+  line-height: $input-line-height;
+}
+
+.col-form-label-lg {
+  padding-top: calc(#{$input-padding-y-lg} + #{$input-border-width});
+  padding-bottom: calc(#{$input-padding-y-lg} + #{$input-border-width});
+  font-size: $font-size-lg;
+  line-height: $input-line-height-lg;
+}
+
+.col-form-label-sm {
+  padding-top: calc(#{$input-padding-y-sm} + #{$input-border-width});
+  padding-bottom: calc(#{$input-padding-y-sm} + #{$input-border-width});
+  font-size: $font-size-sm;
+  line-height: $input-line-height-sm;
+}
+
+// Readonly controls as plain text
+.form-control-plaintext {
+  padding-top: $input-padding-y;
+  padding-bottom: $input-padding-y;
+  line-height: $input-line-height;
+  font-weight: $font-weight-normal;
+}
+
+// Form control sizing
+.form-control-sm {
+  padding: $input-padding-y-sm $input-padding-x-sm;
+  font-size: $font-size-sm;
+  line-height: $input-line-height-sm;
+  @include border-radius($input-border-radius-sm);
+}
+
+select.form-control-sm {
+  &:not([size]):not([multiple]) {
+    height: $input-height-sm;
+  }
+}
+
+.form-control-lg {
+  padding: $input-padding-y-lg $input-padding-x-lg;
+  font-size: $font-size-lg;
+  line-height: $input-line-height-lg;
+  @include border-radius($input-border-radius-lg);
+}
+
+select.form-control-lg {
+  &:not([size]):not([multiple]) {
+    height: $input-height-lg;
+  }
+}
+
+// Form groups
+
+.form-group {
+  margin-bottom: $form-group-margin-bottom;
+}
+
+.form-text {
+  margin-top: $form-text-margin-top;
+}
+
+// Checkboxes and radios
+
+.form-check {
+  padding-left: $form-check-input-gutter;
+}
+
+.form-check-input {
+  margin-top: $form-check-input-margin-y;
+  margin-left: -$form-check-input-gutter;
+
+  &:disabled ~ .form-check-label {
+    color: $text-muted;
+  }
+}
+
+.form-check-inline {
+  margin-right: $form-check-inline-margin-x;
+
+  .form-check-input {
+    margin-right: $form-check-inline-input-margin-x;
+  }
+}
+
+// Form validation
+//
+// Provide feedback to users when form field values are valid or invalid. Works
+// primarily for client-side validation via scoped `:invalid` and `:valid`
+// pseudo-classes but also includes `.is-invalid` and `.is-valid` classes for
+// server side validation.
+
+@include form-validation-state('valid', $form-feedback-valid-color);
+@include form-validation-state('invalid', $form-feedback-invalid-color);
+
+// Inline forms
+
+.form-inline {
+  @include media-breakpoint-up(sm) {
+    .form-check-input {
+      margin-right: $form-check-input-margin-x;
+    }
+  }
+}
+
+label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-normal;
+  color: $gray-700;
+}
+select,
+.select {
+  background-image: url(assets/images/select-arrow.png);
+  background-repeat: no-repeat;
+  background-position: center right 20px;
+}
+.dropdown-toggle.select:after {
+  content: none !important;
+}
+.country-dropdown {
+  .dropdown-menu.show {
+    width: 100%;
+    display: block;
+    top: 95px;
+    left: auto;
+    border-top: 1px solid $gray-800 !important;
+    padding: 0;
+  }
+}
+@media (min-width: 1200px) {
+  .country-dropdown .dropdown-menu.show {
+    width: calc(100% - 3rem);
+  }
+}
+
+/* The container must be positioned relative: */
+.feselect {
+  position: relative;
+}
+
+.feselect select {
+  display: none; /*hide original SELECT element: */
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: '';
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+.select-items div,
+.select-selected {
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: $white;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  margin-top: 5px;
+  border-radius: $input-border-radius !important;
+  border: $input-border-width solid $gray-800 !important;
+  @include box-shadow($dropdown-box-shadow);
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.select-items > div {
+  height: auto !important;
+  padding: $input-padding-y $input-padding-x !important;
+  font-size: $input-font-size !important; // $font-size-base !important;
+  line-height: $input-line-height !important;
+  color: $input-color !important;
+  background-color: $input-bg !important;
+  font-weight: $font-weight-normal !important;
+  -webkit-appearance: none;
+  will-change: border-color, box-shadow;
+  border-radius: $input-border-radius !important;
+}
+
+.file {
+  position: relative;
+  overflow: hidden;
+}
+.file input {
+  position: absolute;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+  height: auto !important;
+  min-height: auto !important;
+}
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
+  top: auto !important;
+}
+.ng-select .ng-select-container:hover {
+  box-shadow: none !important;
+}
+.ng-dropdown-panel {
+  border: $input-border-width solid $gray-800 !important;
+  @include box-shadow($dropdown-box-shadow);
+  padding: 0.5rem !important;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  background: $white !important;
+}
+// select,
+.select,
+.ng-select .ng-arrow-wrapper .ng-arrow {
+  background-image: url(assets/images/select-arrow.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none !important;
+  width: 20px !important;
+  height: 20px !important;
+  display: block;
+  top: 5px !important;
+}
+.ng-select.ng-select-opened > .ng-select-container .ng-arrow {
+  transform: rotate(180deg);
+}
+
+/* Customize the label (the checkbox-container) */
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+  height: 18px;
+  width: 18px;
+  border: 2px solid $gray-500;
+  border-radius: 5px;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+  background-color: $white;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: $dark-yellow;
+  border-color: $dark-yellow;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.input-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+
+/* Hide default HTML checkbox */
+.input-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The input-slider */
+.input-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $gray-300;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.input-slider:before {
+  position: absolute;
+  content: '';
+  height: 24px;
+  width: 24px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.16));
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .input-slider {
+  background-color: $bright-yellow;
+}
+
+input:focus + .input-slider {
+  box-shadow: 0 0 1px $bright-yellow;
+}
+
+input:checked + .input-slider:before {
+  -webkit-transform: translateX(22px);
+  -ms-transform: translateX(22px);
+  transform: translateX(22px);
+}
+
+/* Rounded input-sliders */
+.input-slider.round {
+  border-radius: 25px;
+}
+
+.input-slider.round:before {
+  border-radius: 50%;
+}
+.box-checkbox .checkbox-container {
+  background-color: $input-bg !important;
+  font-weight: $font-weight-normal !important;
+  .checkmark {
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    height: 32px;
+    width: 32px;
+    border: none;
+    border-radius: 32px;
+    &:after {
+      left: 12px;
+      top: 8px;
+      width: 7px;
+      height: 13px;
+    }
+  }
+  &:hover input ~ .checkmark {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  &:hover input:checked ~ .checkmark {
+    background-color: $bright-yellow;
+  }
+}
+
+.ng-select div,
+.ng-select input,
+.ng-select span {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.box-checkbox .checkbox-container .border-box {
+  border: $input-border-width solid $input-border-color !important;
+  border-radius: $input-border-radius !important;
+}
+.box-checkbox .checkbox-container input:checked ~ .checkmark + .border-box {
+  background-color: $blue;
+  border-color: $bright-yellow !important;
+}

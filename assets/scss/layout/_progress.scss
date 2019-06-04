@@ -1,0 +1,67 @@
+// Progress bars adjustments
+.progress-wrapper {
+  position: relative;
+  color: $body-color;
+
+  .progress-label {
+    font-size: $progress-label-font-size;
+  }
+
+  .progress-value {
+    position: absolute;
+    top: 6px;
+    right: 0;
+    color: $body-color;
+  }
+}
+
+.progress {
+  height: $progress-height !important;
+  font-size: $progress-font-size;
+  line-height: $progress-height;
+  background-color: $progress-bg !important;
+  margin-top: 6px;
+  border-radius: $progress-border-radius !important;
+  @include box-shadow($progress-box-shadow);
+}
+
+.progress-sm {
+  height: $progress-sm-height;
+}
+
+.progress-lg {
+  height: $progress-lg-height;
+
+  .progress-bar {
+    height: $progress-lg-height;
+  }
+}
+
+.progress-bar {
+  height: $progress-height;
+  line-height: $progress-height;
+  color: $progress-bar-color;
+  background-color: $progress-bar-bg !important;
+  @include transition($progress-bar-transition);
+}
+
+.progress-secondary {
+  .progress-bar {
+    background-color: $pink !important;
+  }
+}
+
+.progress-tertiary {
+  .progress-bar {
+    background-color: $green !important;
+  }
+}
+
+.progress-bar-striped {
+  @include gradient-striped();
+  background-size: $progress-height $progress-height;
+}
+
+.progress-bar-animated {
+  animation: progress-bar-stripes $progress-bar-animation-timing;
+}
